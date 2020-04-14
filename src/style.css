@@ -65,6 +65,7 @@ form {
 form input {
     width: 80%;
     height: 80%;
+    overflow-y: auto;
 }
 
 form #send-tweet {

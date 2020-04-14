@@ -1,33 +1,50 @@
-let tweet = document.getElementById('tweet-input');
-const button = document.getElementById('send-tweet');
-const section = document.getElementById("tweets");
-let key = Storage.key(index);
+const tweetInput = document.getElementById("tweet-input");
+const button = document.getElementById("send-tweet");
+const tweetArr = [];
 
-button.addEventListener('click', postTweet);
-
-function postTweet(e) {
+button.addEventListener('click', (e) => {
     e.preventDefault();
-    
-    //fazer um loop for numa constante? como printar tudo na tela?
-    //olhar a pagina de storage.key no mdn
+    postTweet(tweetInput.value)
+})
 
-    localStorage.setItem(key, JSON.stringify(tweet.value));
+function postTweet(tweet) {
+    tweet = {
+        id: Date.now(),
+        date: new Date().toLocaleString('pt-BR'),
+        text: tweet.replace(/\n/g, "<br>"),
+    }
 
-    section.innerHTML += `
-    <div>
-      <p><strong>usuario</strong> @usuario</p>
-      <p>${localStorage.getItem(tweet.value)}</p>
-    </div>
+    tweetArr.push(tweet);
+
+    localStorage.setItem("myTweets", JSON.stringify(tweetArr));
+
+    const template = `
+        <div class="tweet-id" id=${tweet.id}>
+          <p><strong>${tweet.id}</strong>@usuario</p><br>
+          <p>${tweet.text}</p><br>
+          <p>${tweet.date}</p>
+          <p id="link${tweet.id}">Excluir</p>
+        </div>
     `
-    tweet.value = '';
-    button.disabled = true;
-};
+    document.getElementById("tweets").innerHTML += template
 
-tweet.addEventListener('input', () => button.disabled = false);
+}
+
+const link = document.getElementById("link")
+console.log(link)
 
 function showTweets() {
-    localStorage.getItem(
-        Storage.key(   )
-    )
+    JSON.parse(localStorage.getItem("myTweets")).forEach(item => {
+        document.getElementById("tweets").innerHTML += `
+        <div class="tweet-id" id=${item.id}>
+        <p><strong>${item.id}</strong>@usuario</p><br>
+        <p>${item.text}</p><br>
+        <p>${item.date}</p>
+        <p id="link${item.id}">Excluir</p>
+      </div>
+        `
+    })
 }
-showTweets();
+
+window.onload = showTweets;
+
