@@ -1,18 +1,22 @@
 let tweet = document.getElementById('tweet-input');
 const button = document.getElementById('send-tweet');
 const section = document.getElementById("tweets");
+let key = Storage.key(index);
 
 button.addEventListener('click', postTweet);
 
-function postTweet(e, index) {
+function postTweet(e) {
     e.preventDefault();
+    
+    //fazer um loop for numa constante? como printar tudo na tela?
+    //olhar a pagina de storage.key no mdn
 
-    JSON.stringify(localStorage.setItem(index, tweet.value));
+    localStorage.setItem(key, JSON.stringify(tweet.value));
 
     section.innerHTML += `
     <div>
       <p><strong>usuario</strong> @usuario</p>
-      <p>${localStorage.getItem(index)}</p>
+      <p>${localStorage.getItem(tweet.value)}</p>
     </div>
     `
     tweet.value = '';
@@ -20,3 +24,10 @@ function postTweet(e, index) {
 };
 
 tweet.addEventListener('input', () => button.disabled = false);
+
+function showTweets() {
+    localStorage.getItem(
+        Storage.key(   )
+    )
+}
+showTweets();
