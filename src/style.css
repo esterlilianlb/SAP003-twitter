@@ -70,11 +70,15 @@ form input {
 form #send-tweet {
     align-self: end;
     margin: 1% 13% 0 0;
+    padding: 1% 3%;
+}
+
+form #send-tweet:disabled {
+    opacity: 70%;
 }
 
 button {
     background-color: #1A91DA;
-    padding: 1% 3%;
     border-radius: 30px;
     color: #fff;
     border: none;
@@ -84,4 +88,14 @@ button {
 #aside-button {
     padding: 5%;
     width: 70%;
+}
+
+section#tweets{
+    width: 100%;
+    padding: 2%;
+}
+
+section#tweets div {
+    width: 100%;
+    padding: 4%;
 }
